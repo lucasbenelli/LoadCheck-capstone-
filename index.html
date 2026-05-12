@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoadCheck</title>
+    <link rel="stylesheet" href="home.css" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>LoadCheck</h1>
+        <p class="subtitle">
+            Smart training tracker for student athletes
+        </p>
+
+        <!-- INPUT SECTION -->
+        <div class="card">
+
+            <div class="form-group">
+                <label>Workout Minutes</label>
+                <input type="number" id="minutes" placeholder="Example: 60">
+            </div>
+
+            <div class="form-group">
+                <label>Workout Intensity (1-10)</label>
+                <input type="number" id="intensity" min="1" max="10" placeholder="Example: 7">
+            </div>
+
+            <button onclick="addWorkout()">Check In</button>
+
+        </div>
+
+        <!-- SCORE SECTION -->
+        <div class="card">
+
+            <h2 style="text-align:center;">Readiness Score</h2>
+
+            <div id="statusCircle" class="status-circle green">
+                READY
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <h3>7 Day Avg</h3>
+                    <p id="shortAvg">0</p>
+                </div>
+
+                <div class="stat">
+                    <h3>28 Day Avg</h3>
+                    <p id="longAvg">0</p>
+                </div>
+
+                <div class="stat">
+                    <h3>Today's Load</h3>
+                    <p id="todayLoad">0</p>
+                </div>
+            </div>
+
+            <div id="tipBox" class="tip-box">
+                Great balance. Keep training consistently.
+            </div>
+
+        </div>
+
+        <!-- CHART SECTION -->
+        <div class="card">
+
+            <h2 style="text-align:center;">Workout History</h2>
+
+            <canvas id="loadChart"></canvas>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
