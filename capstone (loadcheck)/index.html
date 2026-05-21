@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoadCheck</title>
+    <link rel="stylesheet" href="home.css" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>LoadCheck</h1>
+        <p class="subtitle">
+            Smart training tracker for student athletes
+        </p>
+
+        <!-- INPUT SECTION -->
+        <div class="card">
+
+            <div class="form-group">
+                <label>Workout Minutes</label>
+                <input type="number" id="minutes" placeholder="Example: 60">
+            </div>
+
+            <div class="form-group">
+                <label>Workout Intensity (1-10)</label>
+                <p class="s2">Intensity meaning how far did you push your body? Is your heartrate elevated?</p>
+                <input type="number" id="intensity" min="1" max="10" placeholder="Example: 7">
+            </div>
+
+            <button onclick="addWorkout()">Check In</button>
+
+        </div>
+
+        <div class="ai-coach-button" onclick="toggleCoachPanel()">AI Coach</div>
+
+        <div class="ai-coach-panel" id="aiCoachPanel">
+            <div class="ai-coach-header">
+                <div>
+                    <h2>AI Coach</h2>
+                    <p>Tap a suggested prompt or type your question below.</p>
+                </div>
+                <button class="close-panel" onclick="toggleCoachPanel()">×</button>
+            </div>
+
+            <div class="chatbox-container">
+                <div id="chatMessages" class="chat-messages">
+                    <div class="message ai-message">
+                        <p>Hey! I'm your Workout AI Assistant. Ask me anything about training, exercise form, workout plans, recovery, or how to optimize your performance! 💪</p>
+                    </div>
+                </div>
+
+                <div class="suggested-questions" id="suggestedQuestions">
+                    <p style="font-size: 12px; color: #666; margin-bottom: 10px; font-weight: bold;">Suggested Questions:</p>
+                    <div class="questions-grid">
+                        <button class="question-btn" onclick="askQuestion('How do I build muscle?')">💪 Build Muscle</button>
+                        <button class="question-btn" onclick="askQuestion('What are the best cardio workouts?')">🏃 Cardio Workouts</button>
+                        <button class="question-btn" onclick="askQuestion('How important is protein for recovery?')">🥚 Protein & Recovery</button>
+                        <button class="question-btn" onclick="askQuestion('How can I improve my deadlift form?')">🏋️ Deadlift Form</button>
+                        <button class="question-btn" onclick="askQuestion('What should I eat before a workout?')">🍎 Pre-Workout Nutrition</button>
+                        <button class="question-btn" onclick="askQuestion('How much sleep do I need for muscle growth?')">😴 Sleep & Growth</button>
+                        <button class="question-btn" onclick="askQuestion('How do I create a beginner workout plan?')">🆕 Beginner Plan</button>
+                        <button class="question-btn" onclick="askQuestion('How do I prevent injuries during strength training?')">🛡️ Injury Prevention</button>
+                        <button class="question-btn" onclick="askQuestion('What is HIIT and how do I do it?')">⚡ HIIT Training</button>
+                        <button class="question-btn" onclick="askQuestion('How do I break through a workout plateau?')">📈 Plateau Breaking</button>
+                        <button class="question-btn" onclick="askQuestion('How often should I do rest days?')">⏸️ Rest Days</button>
+                        <button class="question-btn" onclick="askQuestion('How do I warm up properly?')">🔥 Proper Warmup</button>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <input 
+                        type="text" 
+                        id="chatInput" 
+                        placeholder="Ask me about workouts, exercises, training plans..." 
+                        class="chat-input"
+                        autocomplete="off"
+                        onkeypress="if(event.key === 'Enter') sendMessage()"
+                    >
+                    <button onclick="sendMessage()" class="chat-send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCORE SECTION -->
+        <div class="card">
+
+            <h2 style="text-align:center;">Readiness Score</h2>
+
+            <div id="statusCircle" class="status-circle green">
+                READY
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <h3>7 Day Average</h3>
+                    <p id="shortAvg">0</p>
+                </div>
+
+                <div class="stat">
+                    <h3>28 Day Average</h3>
+                    <p id="longAvg">0</p>
+                </div>
+
+                <div class="stat">
+                    <h3>Today's Load</h3>
+                    <p id="todayLoad">0</p>
+                </div>
+            </div>
+
+            <div id="tipBox" class="tip-box">
+                Great balance. Keep training consistently.
+            </div>
+
+        </div>
+
+        <!-- CHART SECTION -->
+        <div class="card">
+
+            <h2 style="text-align:center;">Workout History</h2>
+
+            <canvas id="loadChart"></canvas>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
